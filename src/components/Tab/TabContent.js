@@ -3,10 +3,8 @@ import React from 'react'
 
 export default function TabContent(props) {
     let clickHandle = () => {
-        console.log('click on body')
+        console.log('Here will be element click handler')
     }
-
-    console.log(props.records)
 
     let records = props.records.map((record, index) => {
         const address = record.address;
