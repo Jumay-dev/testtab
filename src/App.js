@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import './App.css';
 import TabView from './components/TabView'
+import Filter from './components/Filter'
 
 function App() {
   const [records, setRecords] = useState([])
@@ -20,8 +21,7 @@ function App() {
   }, []);
 
   let sortRecords = (colName, ascending, type) => {
-    let currentRecords = records.slice()
-    currentRecords.sort((a, b) => {
+    let currentRecords = records.sort((a, b) => {
       let one = a[colName]
       let two = b[colName]
 
@@ -34,23 +34,9 @@ function App() {
         one = one.city
         two = two.city
       }
-//тернарный оператор или elseif
+      //тернарный оператор или elseif
       return one > two ? 1 : one === two ? 0 : one < two ? -1 : 0
-
-      // if (one > two) {
-      //   return 1
-      // }
-
-      // if (one === two) {
-      //   return 0
-      // }
-
-      // if (one < two) {
-      //   return -1
-      // }
-
-      // return 0
-    })
+    }).slice()
 
     if (!ascending) {
       currentRecords = currentRecords.reverse()
@@ -59,13 +45,41 @@ function App() {
       setRecords(currentRecords)
   }
 
+  //TODO: реализовать deepSearch с рекурсивной функцией поиска по вложенным структурам
+
+  function filterRecords(searchString) {
+
+    let currentRecords = records.filter( record => {
+      for (let param in record) {
+        if (typeof(record[param]) === 'object') {
+          for (let subparam in record[param]) {
+            if (record[param][subparam].includes(searchString)) {
+              return true
+            }
+          }
+        } else {
+          if (record[param].toString().includes(searchString)) {
+            return true
+          }
+        }
+      }
+      return false
+    }).slice()
+
+    setRecords(currentRecords)
+
+  }
 
   return (
     <div className="App">
+      <Filter 
+        filterRecords={filterRecords}
+      />
       <TabView 
         records={records}
         sortRecords={sortRecords}
       />
+      
       <span>Has error {hasError}</span>
     </div>
   );
