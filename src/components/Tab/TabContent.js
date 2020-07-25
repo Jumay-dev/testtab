@@ -6,6 +6,7 @@ export default function TabContent(props) {
         console.log('click on body')
     }
 
+    console.log(props.records)
 
     let records = props.records.map((record, index) => {
         const address = record.address;

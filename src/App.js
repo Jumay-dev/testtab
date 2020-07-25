@@ -1,58 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
 import './App.css';
 import TabHead from './components/Tab/TabHead'
 import TabContent from './components/Tab/TabContent'
 
 function App() {
-  let records = [
-    {
-      id: 101,
-      firstName: 'Sue',
-      lastName: 'Corson',
-      email: 'DWhalley@in.gov',
-      phone: '(612)211-6296',
-      address: {
-        streetAddress: '9792 Mattis Ct',
-        city: 'Waukesha',
-        state: 'WI',
-        zip: '22178'
-      },
-      description: 'et lacus magna dolor...',
-    },
-    {
-      id: 102,
-      firstName: 'Sue',
-      lastName: 'Corson',
-      email: 'DWhalley@in.gov',
-      phone: '(612)211-6296',
-      address: {
-        streetAddress: '9792 Mattis Ct',
-        city: 'Waukesha',
-        state: 'WI',
-        zip: '22178'
-      },
-      description: 'et lacus magna dolor...',
-    },
-    {
-      id: 103,
-      firstName: 'Sue',
-      lastName: 'Corson',
-      email: 'DWhalley@in.gov',
-      phone: '(612)211-6296',
-      address: {
-        streetAddress: '9792 Mattis Ct',
-        city: 'Waukesha',
-        state: 'WI',
-        zip: '22178'
-      },
-      description: 'et lacus magna dolor...',
-    }
-  ]
+  const [data, setData] = useState([])
+  const [hasError, setErrors] = useState(false)
+
+  async function fetchData(source) {
+    const res = await fetch(source);
+    res
+      .json()
+      .then(res => setData(res))
+      .catch(err => setErrors(err));
+  }
+
+  useEffect(() => {
+    fetchData("http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}");
+  }, []);
+
+
 
   return (
     <div className="App">
       <TabHead />
-      <TabContent records={records}/>
+      <TabContent records={data}/>
+      <span>Has error: {JSON.stringify(hasError)}</span>
     </div>
   );
 }
