@@ -11,6 +11,7 @@ export default function TabView(props) {
 
             <TabContent 
                 records={props.records}
+                chooseRecord={props.chooseRecord}
             />
         </table>
     )

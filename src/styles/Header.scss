@@ -1,0 +1,139 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 20px;
+  
+    background: $main;
+    color: white;
+  
+    h1 {
+      font-size: 1.5em;
+    }
+    button {
+      font-family: "My Roboto";
+      font-size: 1.2em;
+  
+      background: $btn-color;
+      color: white;
+  
+      padding: 5px;
+  
+      border: none;
+      border-radius: 5px;
+  
+      cursor: pointer;
+  
+      &:hover {
+        background: $btn-hover;
+      }
+  
+      &:active {
+        background: $btn-active;
+      }
+    }
+  
+    .record-count {
+      &.hidden {
+        display: none;
+      }
+    }
+  
+    ul {
+      display: flex;
+  
+      li {
+        display: flex;
+        align-items: center;
+        margin: 0 5px;
+  
+        #spinner {
+          visibility: hidden;
+          height: 30px;
+          width: 30px;
+          border: 2px solid #f3f3f3;
+          border-top: 3px solid $btn-color;
+          border-radius: 100%;
+  
+          margin: auto;
+        }
+  
+        #spinner.show {
+          visibility: visible;
+          animation: spin 1s infinite linear;
+        }
+  
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+  
+    form {
+      input[type="search"] {
+        font-family: "My Roboto";
+        font-size: 1.2em;
+  
+        padding: 6px;
+        border-radius: 5px 0 0 5px;
+  
+        border: none;
+  
+        &:focus {
+          outline: none;
+          box-shadow: inset 0px 0px 5px 1px $btn-color;
+        }
+      }
+  
+      button {
+        font-family: "My Roboto";
+        font-size: 1.2em;
+  
+        padding: 5px;
+        border-radius: 0 5px 5px 0;
+  
+        border: 1px solid white;
+  
+        background-color: $btn-color;
+        color: white;
+  
+        &:hover {
+          background-color: $btn-hover;
+        }
+  
+        &:active {
+          background-color: $btn-active;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      ul {
+        li {
+          button {
+            font-size: 0.8em;
+          }
+        }
+      }
+      h1 {
+        font-size: 0.8em;
+      }
+      form {
+        input[type="search"] {
+          font-size: 0.8em;
+        }
+        button {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  

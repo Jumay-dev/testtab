@@ -1,14 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
+
 
 
 export default function TabContent(props) {
-    let clickHandle = () => {
-        console.log('Here will be element click handler')
+    // const [recordState, setRecordState] = useState({
+    //     id: '',
+    //     firstName: ''
+    // })
+
+    let clickHandle = event => {
+        const choosen = event.target.closest('tr')
+        props.chooseRecord({
+            id: choosen.children['id'].innerText,
+            firstName: choosen.children['first-name'].innerText
+        })
+
+        console.log(choosen.children['id'].innerText)
+        // props.chooseRecord(recordState)
     }
 
     let records = props.records.map((record, index) => {
-        const address = record.address;
-        const viewAddress = `${address.streetAddress},\n${address.city} ${address.zip}, ${address.state}`;
         return (
             <tr key={index}>
                 <td className='id' name='id'>{record.id}</td>
@@ -16,8 +27,6 @@ export default function TabContent(props) {
                 <td className='last-name' name='last-name'>{record.lastName}</td>
                 <td className='email' name='email'>{record.email}</td>
                 <td className='phone' name='phone'>{record.phone}</td>
-                <td className='address' name='address'>{viewAddress}</td>
-                <td className='description' name='description' title={record.description}>{record.description}</td>
             </tr>
         )
     });

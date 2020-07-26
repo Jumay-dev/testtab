@@ -1,0 +1,74 @@
+.react-table {
+    width: 100%;
+    margin: 10px 0;
+  
+    thead {
+      border-bottom: 1px solid black;
+  
+      th {
+        position: relative;
+        border-right: 1px solid lightgrey;
+        padding: 5px 0;
+        cursor: pointer;
+  
+        &:last-child {
+          border-right: none;
+        }
+  
+        &.ascending::after {
+          content: "▼";
+          position: absolute;
+          right: 0;
+        }
+  
+        &.descending::after {
+          content: "▲";
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  
+    tbody {
+      tr {
+        border-bottom: 1px solid grey;
+        cursor: pointer;
+  
+        &:hover {
+          background: $btn-hover;
+          color: white;
+        }
+  
+        td {
+          padding: 10px 0;
+          text-align: center;
+          border-right: 1px solid lightgrey;
+  
+          &:last-child {
+            border-right: none;
+          }
+  
+          &.id {
+            width: 5%;
+          }
+  
+          &.first-name {
+            width: 10%;
+          }
+  
+          &.last-name {
+            width: 10%;
+          }
+  
+          &.email {
+            width: 15%;
+          }
+  
+          &.phone {
+            width: 10%;
+          }
+        }
+      }
+    }
+  }
+  

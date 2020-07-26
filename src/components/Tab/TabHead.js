@@ -4,6 +4,7 @@ export default function TabHead(props) {
     let clickHandle = event => {
         let sortableColumn = event.target;
         Array.prototype.forEach.call(event.currentTarget.children, child => {
+            if ( child !== sortableColumn)
             child.classList.remove('ascending')
             child.classList.remove('descending')
         })
@@ -26,8 +27,6 @@ export default function TabHead(props) {
                 <th data-name='lastName' data-type='string'>Last Name</th>
                 <th data-name='email' data-type='string'>Email</th>
                 <th data-name='phone' data-type='string'>Phone</th>
-                <th data-name='address' data-type='address'>Address</th>
-                <th data-name='description' data-type='string'>Description</th>
             </tr>
         </thead>
     )
