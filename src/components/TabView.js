@@ -4,7 +4,6 @@ import TabContent from './Tab/TabContent'
 
 export default function TabView(props) {
 
-    
     return (
         <table className="react-table">
             <TabHead 

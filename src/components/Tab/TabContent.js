@@ -3,10 +3,6 @@ import React from 'react'
 
 
 export default function TabContent(props) {
-    // const [recordState, setRecordState] = useState({
-    //     id: '',
-    //     firstName: ''
-    // })
 
     let clickHandle = event => {
         const choosen = event.target.closest('tr')

@@ -9,7 +9,6 @@ export default function Filter(props) {
     }
 
     let submitHandle = event => {
-        console.log(event)
         event.preventDefault()
         props.filterRecords(searchString)
     }

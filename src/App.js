@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import TabView from './components/TabView'
 import NewRecord from './components/NewRecord'
 import Header from './components/Header'
-import Loader from './components/Loader'
+// import Loader from './components/Loader'
 import Info from './components/Info'
+import Pagination from './components/Pagination'
 
 function App() {
   const [records, setRecords] = useState([])
@@ -17,21 +18,10 @@ function App() {
       city: '',
       state: '',
       zip: ''
-
     },
-
   })
-
-  async function fetchData(source, pagCount) {
-    const res = await fetch(source);
-    res
-      .json()
-      .then(res => setRecords(res))
-  }
-
-  useEffect(() => {
-    fetchData("http://www.filltext.com/?rows=20&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}");
-  }, []);
+  const [currentPage, setCurrentPage] = useState(0)
+  const [splittedRecords, setSplittedRecords] = useState([])
 
   let sortRecords = (colName, ascending, type) => {
     let currentRecords = records.sort((a, b) => {
@@ -55,7 +45,7 @@ function App() {
       currentRecords = currentRecords.reverse()
     }
 
-      setRecords(currentRecords)
+    setSplittedRecords(splitRecords(currentRecords))
   }
 
   //TODO: реализовать deepSearch с рекурсивной функцией поиска по вложенным структурам
@@ -79,14 +69,43 @@ function App() {
       return false
     }).slice()
 
+    console.log(splitRecords(currentRecords))
+
     setRecords(currentRecords)
+    setChoosenRec({
+      id: '',
+      firstName: '',
+      description: '',
+      address: {
+        streetAddress: '',
+        city: '',
+        state: '',
+        zip: ''
+      }}
+      )
+  }
+
+  let changeRecordsCount = records => {
+    setSplittedRecords(splitRecords(records))
+    setCurrentPage(0)
+    setRecords(records)
+    setChoosenRec({
+      id: '',
+      firstName: '',
+      description: '',
+      address: {
+        streetAddress: '',
+        city: '',
+        state: '',
+        zip: ''}
+      })
   }
 
   let addNewRecord = record => {
     let currentRecords = records.slice()
     currentRecords.unshift(record)
-    setRecords(currentRecords)
-    console.log(records)
+    setSplittedRecords(currentRecords)
+    setCurrentPage(0)
   }
 
   let chooseRecord = r => {
@@ -99,21 +118,52 @@ function App() {
 
     setChoosenRec(choosenRecord)
 
-    console.log(choosenRecord)
-
     document.querySelector('.view-info-wrapper').classList.remove('hidden')
+  }
+
+  let splitRecords = records => {
+    // debugger
+    const size = 50
+    let pageList = []
+    let itemList = []
+    records.forEach((item, index) => {
+        if ((index + 1) % size === 0) {
+          pageList.push(itemList)
+          itemList = []
+        }
+        itemList.push(item)
+    })
+    return pageList
+  }
+
+  let changePage = page => {
+    setCurrentPage(page)
   }
 
   return (
     <div className="App">
       <Header 
         filterRecords={filterRecords}
+        changeRecordsCount={changeRecordsCount}
         availability={records.length === 0 ? false : true}
       />
+
+      { splittedRecords.length > 0 ?
+      <>
+      <Pagination 
+          currentPage={currentPage}
+          pageCount={splittedRecords.length}
+          changePage={changePage}
+      />      
       <TabView 
-        records={records}
+        records={splittedRecords[currentPage]}
         sortRecords={sortRecords}
         chooseRecord={chooseRecord}
+      />
+      <Pagination 
+          currentPage={currentPage}
+          pageCount={splittedRecords.length}
+          changePage={changePage}
       />
       <Info 
         choosenRecord={choosenRec} 
@@ -121,11 +171,8 @@ function App() {
       <NewRecord 
         addNewRecord={addNewRecord}
       />
-      
-      
-      <Loader 
-        visibility={records.length === 0 ? true : false}
-      />      
+      </>
+      : null}     
     </div>
   );
 }
