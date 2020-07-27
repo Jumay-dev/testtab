@@ -12,22 +12,17 @@ export default function Info(props) {
 
     return (
         <div className="view-info-wrapper hidden" onClick={closeHandle}>
-        <div className='view-info'>
-            <div className='grid-container'>
-                <span>Выбран пользователь <b>{props.choosenRecord.firstName + ' ' + props.choosenrecord.lastName}</b></span>
-                <span>Описание:</span>
-                <span>{props.choosenRecord.description}</span>
-                <span>Адрес проживания:</span>
-                <span>{address.streetAddress}</span>
-                <span>Город:</span>
-                <span>{address.city}</span>
-                <span>Провинция/штат:</span>
-                <span>{address.state}</span>
-                <span>Индекс:</span>
-                <span>{address.zip}</span>
+            <div className='view-info'>
+                <div className='grid-container'>
+                    <span>Выбран пользователь <b>{props.choosenRecord.firstName + ' ' + props.choosenRecord.lastName}</b></span>
+                    <span>Описание: {props.choosenRecord.description}</span>
+                    <span>Адрес проживания: {address.streetAddress}</span>
+                    <span>Город: {address.city}</span>
+                    <span>Провинция/штат: {address.state}</span>
+                    <span>Индекс: {address.zip}</span>
+                </div>
+                <span className="close-info">x</span>
             </div>
-            <span className="close-info">x</span>
         </div>
-    </div>
     )
 }

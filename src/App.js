@@ -10,7 +10,16 @@ function App() {
   const [records, setRecords] = useState([])
   const [choosenRec, setChoosenRec] = useState({
     id: '',
-    firstName: ''
+    firstName: '',
+    description: '',
+    address: {
+      streetAddress: '',
+      city: '',
+      state: '',
+      zip: ''
+
+    },
+
   })
 
   async function fetchData(source, pagCount) {
@@ -80,15 +89,17 @@ function App() {
     console.log(records)
   }
 
-  let chooseRecord = ({id, firstName}) => {
+  let chooseRecord = r => {
     const choosenRecord = records.find((item) => {
-      if (item.id === parseInt(id) && item.firstName === firstName) {
+      if (item.id === parseInt(r.id) && item.firstName === r.firstName) {
         return true;
       }
       return false;
     })
 
     setChoosenRec(choosenRecord)
+
+    console.log(choosenRecord)
 
     document.querySelector('.view-info-wrapper').classList.remove('hidden')
   }
@@ -104,9 +115,9 @@ function App() {
         sortRecords={sortRecords}
         chooseRecord={chooseRecord}
       />
-      {/* <Info 
+      <Info 
         choosenRecord={choosenRec} 
-      /> */}
+      />
       <NewRecord 
         addNewRecord={addNewRecord}
       />
