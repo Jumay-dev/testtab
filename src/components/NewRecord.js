@@ -25,6 +25,7 @@ export default function NewRecord(props) {
                 },
                 description: formElems['description'].value
             })
+                console.log(record)
                 props.addNewRecord(record);
                 setRecord({});
                 document.querySelector('.add-new-record').reset();

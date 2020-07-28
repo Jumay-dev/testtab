@@ -10,7 +10,10 @@ export default function Header(props) {
     return(
         <nav className=''>
             <h1>Test table</h1>
-            <RecordsCount changeRecordsCount={props.changeRecordsCount}/>
+            <RecordsCount 
+                changeRecordsCount={props.changeRecordsCount}
+                toggleShowLoader={props.toggleShowLoader}
+            />
             {props.availability && <button className="show-form" onClick={addRecordHandle}>New record</button>}
             <Filter filterRecords={props.filterRecords}/>
         </nav>

@@ -3,7 +3,7 @@ import './App.css';
 import TabView from './components/TabView'
 import NewRecord from './components/NewRecord'
 import Header from './components/Header'
-// import Loader from './components/Loader'
+import Loader from './components/Loader'
 import Info from './components/Info'
 import Pagination from './components/Pagination'
 
@@ -22,6 +22,7 @@ function App() {
   })
   const [currentPage, setCurrentPage] = useState(0)
   const [splittedRecords, setSplittedRecords] = useState([])
+  const [showLoader, setShowLoader] = useState(false)
 
   let sortRecords = (colName, ascending, type) => {
     let currentRecords = records.sort((a, b) => {
@@ -107,7 +108,9 @@ function App() {
   let addNewRecord = record => {
     let currentRecords = records.slice()
     currentRecords.unshift(record)
-    setSplittedRecords(currentRecords)
+    setRecords(currentRecords)
+
+    setSplittedRecords(splitRecords(records))
     setCurrentPage(0)
   }
 
@@ -151,12 +154,18 @@ function App() {
     setCurrentPage(page)
   }
 
+  let toggleShowLoader = bool => {
+    setShowLoader(bool)
+  }
+
+
   return (
     <div className="App">
       <Header 
         filterRecords={filterRecords}
         changeRecordsCount={changeRecordsCount}
         availability={records.length === 0 ? false : true}
+        toggleShowLoader={toggleShowLoader}
       />
 
       { splittedRecords.length > 0 ?
@@ -183,7 +192,7 @@ function App() {
         addNewRecord={addNewRecord}
       />
       </>
-      : null}     
+      : <Loader showLoader={showLoader}/>}     
     </div>
   );
 }

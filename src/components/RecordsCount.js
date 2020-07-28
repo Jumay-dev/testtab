@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function RecordsCount(props) {
     let clickHandle = event => {
+        props.toggleShowLoader(true)
         let url = new URL('http://www.filltext.com/');
         url.searchParams.append('rows', event.target.dataset.value);
         url.searchParams.append('id', '{number|1000}');
@@ -16,8 +17,8 @@ export default function RecordsCount(props) {
         .then(res => res.json())
         .then(result => {
             props.changeRecordsCount(result);
-            // spinner.classList.remove('show');
             document.querySelector('.record-count').classList.add('hidden');
+            props.toggleShowLoader(false)
         })
         .catch(console.log);
     }
@@ -25,8 +26,8 @@ export default function RecordsCount(props) {
     return (
         <div className='record-count'>
             <ul>
-                <li className=''><button onClick={clickHandle} data-value='32'>32 записи</button></li>
-                <li className=''><button onClick={clickHandle} data-value='1000'>1000 записей</button></li>
+                <li className=''><button onClick={clickHandle} data-value='32'>32 records</button></li>
+                <li className=''><button onClick={clickHandle} data-value='1000'>1000 records</button></li>
             </ul>
         </div>
     )
