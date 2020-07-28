@@ -26,8 +26,8 @@ export default function RecordsCount(props) {
     return (
         <div className='record-count'>
             <ul>
-                <li className=''><button onClick={clickHandle} data-value='32'>32 records</button></li>
-                <li className=''><button onClick={clickHandle} data-value='1000'>1000 records</button></li>
+                <li className=''><button onClick={clickHandle} data-value='32'>32 записи</button></li>
+                <li className=''><button onClick={clickHandle} data-value='1000'>1000 записей</button></li>
             </ul>
         </div>
     )

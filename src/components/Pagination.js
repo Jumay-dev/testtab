@@ -1,4 +1,5 @@
 import React from 'react'
+import Pages from './Pages'
 
 export default function Pagination(props) {
     let clickHandle = event => {
@@ -14,7 +15,11 @@ export default function Pagination(props) {
     return (
         <div className="pagination">
             <button id='prev-page' onClick={clickHandle}>{'<'}</button>
-            <p>{props.currentPage + 1} of {props.pageCount}</p>
+            <Pages
+                pageCount={props.pageCount}
+                currentPage={props.currentPage}
+                changePage={props.changePage}
+            />
             <button id='next-page' onClick={clickHandle}>{'>'}</button>
         </div>
     )

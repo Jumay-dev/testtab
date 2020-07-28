@@ -14,7 +14,7 @@ export default function Header(props) {
                 changeRecordsCount={props.changeRecordsCount}
                 toggleShowLoader={props.toggleShowLoader}
             />
-            {props.availability && <button className="show-form" onClick={addRecordHandle}>New record</button>}
+            {props.availability && <button className="show-form" onClick={addRecordHandle}>Добавить</button>}
             <Filter 
                 filterRecords={props.filterRecords}
             />

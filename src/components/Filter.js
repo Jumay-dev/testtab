@@ -16,8 +16,8 @@ export default function Filter(props) {
 
     return(
         <form onSubmit={submitHandle}>
-            <input type='search' placeholder='Input filter' onChange={changeHandle}/>
-            <button type='submit'>Search</button>
+            <input type='search' placeholder='Введите фильтр' onChange={changeHandle}/>
+            <button type='submit'>Поиск</button>
         </form>
     )
 }
