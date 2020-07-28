@@ -12,7 +12,6 @@ export default function RecordsCount(props) {
         url.searchParams.append('phone', '{phone|(xxx)xxx-xx-xx}');
         url.searchParams.append('address', '{addressObject}');
         url.searchParams.append('description', '{lorem|32}');
-        // let spinner = document.querySelector('#spinner')
         fetch(url)
         .then(res => res.json())
         .then(result => {
