@@ -69,9 +69,12 @@ function App() {
       return false
     }).slice()
 
-    console.log(splitRecords(currentRecords))
-
-    setRecords(currentRecords)
+    setCurrentPage(0)
+    setSplittedRecords(splitRecords(currentRecords))
+    console.log(splittedRecords)
+    console.log(records)
+    console.log(currentPage)
+    console.log(splittedRecords)
     setChoosenRec({
       id: '',
       firstName: '',
@@ -86,9 +89,9 @@ function App() {
   }
 
   let changeRecordsCount = records => {
+    setRecords(records)
     setSplittedRecords(splitRecords(records))
     setCurrentPage(0)
-    setRecords(records)
     setChoosenRec({
       id: '',
       firstName: '',
@@ -126,13 +129,21 @@ function App() {
     const size = 50
     let pageList = []
     let itemList = []
-    records.forEach((item, index) => {
+    if (records.length > size) {
+      records.forEach((item, index) => {
         if ((index + 1) % size === 0) {
           pageList.push(itemList)
           itemList = []
         }
         itemList.push(item)
     })
+    } else {
+      records.forEach((item) => {
+        itemList.push(item)
+      })
+      pageList.push(itemList)
+    }
+    console.log(pageList)
     return pageList
   }
 
