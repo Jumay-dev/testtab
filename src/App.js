@@ -72,10 +72,6 @@ function App() {
 
     setCurrentPage(0)
     setSplittedRecords(splitRecords(currentRecords))
-    console.log(splittedRecords)
-    console.log(records)
-    console.log(currentPage)
-    console.log(splittedRecords)
     setChoosenRec({
       id: '',
       firstName: '',
@@ -88,6 +84,7 @@ function App() {
       }}
       )
   }
+
 
   let changeRecordsCount = records => {
     setRecords(records)
@@ -109,8 +106,7 @@ function App() {
     let currentRecords = records.slice()
     currentRecords.unshift(record)
     setRecords(currentRecords)
-
-    setSplittedRecords(splitRecords(records))
+    setSplittedRecords(splitRecords(currentRecords))
     setCurrentPage(0)
   }
 
@@ -146,7 +142,6 @@ function App() {
       })
       pageList.push(itemList)
     }
-    console.log(pageList)
     return pageList
   }
 

@@ -13,19 +13,11 @@ export default function Filter(props) {
         props.filterRecords(searchString)
     }
 
-    let resetFilter = event => {
-        console.log('reset handler')
-    }
 
-    let deepSearchToggle = event => {
-        console.log('deep search handler')
-    }
     return(
         <form onSubmit={submitHandle}>
-            <input type='checkbox' onChange={deepSearchToggle}></input>
             <input type='search' placeholder='Input filter' onChange={changeHandle}/>
             <button type='submit'>Search</button>
-            <button onClick={resetFilter}>Reset filters</button>
         </form>
     )
 }

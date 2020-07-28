@@ -1,17 +1,18 @@
 import React, {useState} from 'react'
 
 export default function NewRecord(props) {
-    const [record, setRecord] = useState({})
 
     let submitHandle = event => {
         event.preventDefault();
         let formElems = event.target.elements;
+
         let emptyElem = Array.prototype.filter.call(formElems, elem => {
             return elem.value === '';
         });
 
         if (emptyElem.length === 0) {
-            setRecord({
+
+            let newRecord = {
                 id: parseInt(formElems['id'].value),
                 firstName: formElems['first-name'].value,
                 lastName: formElems['last-name'].value,
@@ -24,12 +25,12 @@ export default function NewRecord(props) {
                     zip: formElems['zip'].value,
                 },
                 description: formElems['description'].value
-            })
-                console.log(record)
-                props.addNewRecord(record);
-                setRecord({});
-                document.querySelector('.add-new-record').reset();
-                document.querySelector('.form-wrapper').classList.add('hidden');
+            }
+            console.log(newRecord)
+            props.addNewRecord(newRecord);
+            newRecord = {}
+            document.querySelector('.add-new-record').reset();
+            document.querySelector('.form-wrapper').classList.add('hidden');
         } else {
             let alrt = document.querySelector('.alert');
             alrt.classList.remove('hidden');
@@ -47,7 +48,7 @@ export default function NewRecord(props) {
 
     return (
         <div className='form-wrapper hidden' onClick={clickHandle}>
-            <span className='alert hidden'>Заполните все поля</span>
+            <span className='alert hidden'>Fill each field</span>
             <form className="add-new-record" onSubmit={submitHandle}>
                 <label htmlFor="id">ID:</label>
                 <input id='id' name='id' type="number" />
