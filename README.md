@@ -2,6 +2,8 @@
 
 Добавил react-bootstrap для элемента Loader, чтобы ускорить разработку и не тратить времени на стилизацию загрузки
 
+Проект на Docker Hub: docker pull jumaydev/testtab
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
